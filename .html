@@ -67,4 +67,44 @@
   </style>
 </head>
 <body>
-  <div class="t
+  <div class="timeline">
+    <div class="line"></div>
+    <!-- 10 個時間軸項目 -->
+    <div class="timeline-item">歷史事件 1 - 發生了某個重要事件</div>
+    <div class="timeline-item">歷史事件 2 - 另一個有趣的事件</div>
+    <div class="timeline-item">歷史事件 3 - 重大發現</div>
+    <div class="timeline-item">歷史事件 4 - 突破性發展</div>
+    <div class="timeline-item">歷史事件 5 - 重要的改變</div>
+    <div class="timeline-item">歷史事件 6 - 歷史上的重要人物</div>
+    <div class="timeline-item">歷史事件 7 - 技術的進步</div>
+    <div class="timeline-item">歷史事件 8 - 社會變革</div>
+    <div class="timeline-item">歷史事件 9 - 科技創新</div>
+    <div class="timeline-item">歷史事件 10 - 現代的重要發展</div>
+  </div>
+
+  <script>
+    // 取得所有時間軸項目
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    // 設定 Intersection Observer 參數
+    const observerOptions = {
+      threshold: 0.1 // 當可見度達到 10% 時觸發
+    };
+
+    // 建立 Intersection Observer
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible'); // 當進入畫面時，添加 visible 類別觸發動畫
+          observer.unobserve(entry.target); // 停止觀察該元素（避免重複觸發）
+        }
+      });
+    }, observerOptions);
+
+    // 觀察每個時間軸項目
+    timelineItems.forEach(item => {
+      observer.observe(item);
+    });
+  </script>
+</body>
+</html>
